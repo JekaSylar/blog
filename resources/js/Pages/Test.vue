@@ -1,11 +1,9 @@
 <script setup>
-import {Link} from "@inertiajs/vue3";
-
-//console.log(route().current());
+import { Link } from '@inertiajs/vue3'
 </script>
 
 <template>
-<h1>Index</h1>
+<h1>Test</h1>
     <hr>
     <Link :href="route('index')">Home</Link>
     <Link :href="route('test')">Test</Link>

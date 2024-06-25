@@ -1,5 +1,5 @@
 import './bootstrap';
-import { createApp, h } from 'vue'
+import { createSSRApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 
