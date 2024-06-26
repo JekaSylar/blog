@@ -1,56 +1,18 @@
-import { mergeProps, unref, withCtx, createTextVNode, useSSRContext, createSSRApp, h as h$1 } from "vue";
-import { ssrRenderAttrs, ssrRenderComponent } from "vue/server-renderer";
-import { Link, createInertiaApp } from "@inertiajs/vue3";
-import createServer from "@inertiajs/vue3/server";
-import { renderToString } from "@vue/server-renderer";
-const _sfc_main = {
-  __name: "Index",
-  __ssrInlineRender: true,
-  setup(__props) {
-    return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "bg-green-500" }, _attrs))}><h1>Index</h1><hr>`);
-      _push(ssrRenderComponent(unref(Link), {
-        href: _ctx.route("index")
-      }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
-          if (_push2) {
-            _push2(`Home`);
-          } else {
-            return [
-              createTextVNode("Home")
-            ];
-          }
-        }),
-        _: 1
-      }, _parent));
-      _push(ssrRenderComponent(unref(Link), {
-        href: _ctx.route("test")
-      }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
-          if (_push2) {
-            _push2(`Test`);
-          } else {
-            return [
-              createTextVNode("Test")
-            ];
-          }
-        }),
-        _: 1
-      }, _parent));
-      _push(`</div>`);
-    };
+import axios from "axios";
+import { createApp, h as h$1 } from "vue";
+import { createInertiaApp } from "@inertiajs/vue3";
+window.axios = axios;
+window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+async function resolvePageComponent(path, pages) {
+  for (const p2 of Array.isArray(path) ? path : [path]) {
+    const page = pages[p2];
+    if (typeof page === "undefined") {
+      continue;
+    }
+    return typeof page === "function" ? page() : page;
   }
-};
-const _sfc_setup = _sfc_main.setup;
-_sfc_main.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Index.vue");
-  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
-};
-const __vite_glob_0_0 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  default: _sfc_main
-}, Symbol.toStringTag, { value: "Module" }));
+  throw new Error(`Page not found: ${path}`);
+}
 function t() {
   return t = Object.assign ? Object.assign.bind() : function(t4) {
     for (var e2 = 1; e2 < arguments.length; e2++) {
@@ -375,21 +337,14 @@ const k = { install(t4, e2) {
   const r2 = (t5, r3, n2, o2 = e2) => T(t5, r3, n2, o2);
   parseInt(t4.version) > 2 ? (t4.config.globalProperties.route = r2, t4.provide("route", r2)) : t4.mixin({ methods: { route: r2 } });
 } };
-createServer(
-  (page) => createInertiaApp({
-    page,
-    render: renderToString,
-    resolve: (name) => {
-      const pages = /* @__PURE__ */ Object.assign({ "./Pages/Index.vue": __vite_glob_0_0 });
-      return pages[`./Pages/${name}.vue`];
-    },
-    setup({ App, props, plugin }) {
-      return createSSRApp({
-        render: () => h$1(App, props)
-      }).use(plugin).use(k, {
-        ...page.props.ziggy,
-        location: new URL(page.props.ziggy.location)
-      });
-    }
-  })
-);
+const appName = "Laravel";
+createInertiaApp({
+  title: (title) => `${title} - ${appName}`,
+  resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, /* @__PURE__ */ Object.assign({ "./Pages/API/Index.vue": () => import("./assets/Index-RpDZujKN.js"), "./Pages/API/Partials/ApiTokenManager.vue": () => import("./assets/ApiTokenManager-JVomzZmx.js"), "./Pages/Auth/ConfirmPassword.vue": () => import("./assets/ConfirmPassword-Di-hl8Wc.js"), "./Pages/Auth/ForgotPassword.vue": () => import("./assets/ForgotPassword-CRp36j9x.js"), "./Pages/Auth/Login.vue": () => import("./assets/Login-CNIzQCu8.js"), "./Pages/Auth/Register.vue": () => import("./assets/Register-D5eMK2i4.js"), "./Pages/Auth/ResetPassword.vue": () => import("./assets/ResetPassword-CJySVPew.js"), "./Pages/Auth/TwoFactorChallenge.vue": () => import("./assets/TwoFactorChallenge-B3iA8hcW.js"), "./Pages/Auth/VerifyEmail.vue": () => import("./assets/VerifyEmail-DcE98nSl.js"), "./Pages/Dashboard.vue": () => import("./assets/Dashboard-CuKrT3Bo.js"), "./Pages/Index.vue": () => import("./assets/Index-C789Bz-W.js"), "./Pages/PrivacyPolicy.vue": () => import("./assets/PrivacyPolicy-BvilYZOp.js"), "./Pages/Profile/Partials/DeleteUserForm.vue": () => import("./assets/DeleteUserForm-BMY6Z8HN.js"), "./Pages/Profile/Partials/LogoutOtherBrowserSessionsForm.vue": () => import("./assets/LogoutOtherBrowserSessionsForm-CNXKCdaD.js"), "./Pages/Profile/Partials/TwoFactorAuthenticationForm.vue": () => import("./assets/TwoFactorAuthenticationForm-CMIdRMU1.js"), "./Pages/Profile/Partials/UpdatePasswordForm.vue": () => import("./assets/UpdatePasswordForm-DyP37zGT.js"), "./Pages/Profile/Partials/UpdateProfileInformationForm.vue": () => import("./assets/UpdateProfileInformationForm-CSy34x5S.js"), "./Pages/Profile/Show.vue": () => import("./assets/Show-CaCBP9NB.js"), "./Pages/TermsOfService.vue": () => import("./assets/TermsOfService-ealoVoJf.js"), "./Pages/Welcome.vue": () => import("./assets/Welcome-fw4BC0B8.js") })),
+  setup({ el, App, props, plugin }) {
+    return createApp({ render: () => h$1(App, props) }).use(plugin).use(k).mount(el);
+  },
+  progress: {
+    color: "#4B5563"
+  }
+});
