@@ -45,16 +45,16 @@ const closeModal = () => {
 <template>
     <ActionSection>
         <template #title>
-            Browser Sessions
+            Браузерні сесії
         </template>
 
         <template #description>
-            Manage and log out your active sessions on other browsers and devices.
+            Керуйте активними сесіями в інших браузерах і пристроях та виходьте з них.
         </template>
 
         <template #content>
             <div class="max-w-xl text-sm text-gray-600 dark:text-gray-400">
-                If necessary, you may log out of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password.
+                Якщо необхідно, ви можете вийти з усіх інших сеансів браузера на всіх ваших пристроях. Деякі з ваших останніх сесій наведені нижче; однак цей список може бути неповним. Якщо ви вважаєте, що ваш обліковий запис було скомпрометовано, вам також слід оновити свій пароль.
             </div>
 
             <!-- Other Browser Sessions -->
@@ -89,30 +89,29 @@ const closeModal = () => {
 
             <div class="flex items-center mt-5">
                 <PrimaryButton @click="confirmLogout">
-                    Log Out Other Browser Sessions
+                    Вийдіть з інших сеансів браузера
                 </PrimaryButton>
 
                 <ActionMessage :on="form.recentlySuccessful" class="ms-3">
-                    Done.
+                    Готово
                 </ActionMessage>
             </div>
 
             <!-- Log Out Other Devices Confirmation Modal -->
             <DialogModal :show="confirmingLogout" @close="closeModal">
                 <template #title>
-                    Log Out Other Browser Sessions
+                    Вийдіть з інших сеансів браузера
                 </template>
 
                 <template #content>
-                    Please enter your password to confirm you would like to log out of your other browser sessions across all of your devices.
-
+                    Будь ласка, введіть пароль, щоб підтвердити, що ви хочете вийти з інших сеансів браузера на всіх ваших пристроях.
                     <div class="mt-4">
                         <TextInput
                             ref="passwordInput"
                             v-model="form.password"
                             type="password"
                             class="mt-1 block w-3/4"
-                            placeholder="Password"
+                            placeholder="Пароль"
                             autocomplete="current-password"
                             @keyup.enter="logoutOtherBrowserSessions"
                         />
@@ -123,7 +122,7 @@ const closeModal = () => {
 
                 <template #footer>
                     <SecondaryButton @click="closeModal">
-                        Cancel
+                        Скасувати
                     </SecondaryButton>
 
                     <PrimaryButton
@@ -132,7 +131,7 @@ const closeModal = () => {
                         :disabled="form.processing"
                         @click="logoutOtherBrowserSessions"
                     >
-                        Log Out Other Browser Sessions
+                        Вийдіть з інших сеансів браузера
                     </PrimaryButton>
                 </template>
             </DialogModal>

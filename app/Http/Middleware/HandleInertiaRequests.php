@@ -41,6 +41,14 @@ class HandleInertiaRequests extends Middleware
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
+                'auth' => function () use ( $request ) {
+                    if(!$request->user()) {
+                        return;
+                    }
+                    return [
+                        'user' => $request->user(),
+                    ];
+                }
             ],
         ];
     }

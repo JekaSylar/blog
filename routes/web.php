@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -19,8 +20,10 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
     'administrator'
-])->group(function () {
-    Route::get('/dashboard', function () {
+])->prefix('dashboard')->group(function () {
+    Route::get('/', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+
 });

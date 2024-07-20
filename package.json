@@ -19,6 +19,8 @@
         "vue": "^3.3.13"
     },
     "dependencies": {
+        "@headlessui/vue": "^0.0.0-insiders.275c205",
+        "@heroicons/vue": "^2.1.4",
         "@inertiajs/vue3": "^1.2.0",
         "@vitejs/plugin-vue": "^5.0.5",
         "@vue/server-renderer": "^3.4.30"
