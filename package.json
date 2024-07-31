@@ -23,6 +23,7 @@
         "@heroicons/vue": "^2.1.4",
         "@inertiajs/vue3": "^1.2.0",
         "@vitejs/plugin-vue": "^5.0.5",
-        "@vue/server-renderer": "^3.4.30"
+        "@vue/server-renderer": "^3.4.30",
+        "vue3-toastify": "^0.2.2"
     }
 }

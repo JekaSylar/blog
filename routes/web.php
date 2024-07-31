@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Middleware\IsAdministrator;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\Admin\CategoryController;
 
 
 Route::get('/', function () {
@@ -13,6 +13,10 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
+})->name('home');
+
+Route::middleware(['guest'])->group(function () {
+
 });
 
 Route::middleware([
@@ -22,8 +26,13 @@ Route::middleware([
     'administrator'
 ])->prefix('dashboard')->group(function () {
     Route::get('/', function () {
-        return Inertia::render('Dashboard');
+        return Inertia::render('Admin/Dashboard');
     })->name('dashboard');
+
+    Route::resource('categories', CategoryController::class)->except([
+        'create',
+        'show'
+    ]);
 
 
 });

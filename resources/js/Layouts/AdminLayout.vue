@@ -18,7 +18,6 @@ import NavMenu from "@/Components/Admin/NavMenu.vue"
 const props = defineProps({
     title: {
         type: String,
-        required: true
     }
 });
 
@@ -29,7 +28,7 @@ const handleOpenSidebar = () => {
 }
 </script>
 <template>
-    <Head :title="title" />
+
     <div>
         <TransitionRoot as="template" :show="sidebarOpen">
             <Dialog class="relative z-50 lg:hidden" @close="sidebarOpen = false">
